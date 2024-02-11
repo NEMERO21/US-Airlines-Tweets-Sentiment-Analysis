@@ -27,7 +27,7 @@ The main objective of this dashboard is to offer an interactive platform for sen
 
 ## Data Source
 
-The dataset used in this dashboard is the "Tweets about US Airlines" dataset, which contains tweets along with their sentiment labels.
+The dataset used in this dashboard is the "Twitter US Airline Sentiment" dataset from Kaggle.
 
 ## Acknowledgments
 
