@@ -31,7 +31,7 @@ The dataset used in this dashboard is the "Tweets about US Airlines" dataset, wh
 
 ## Acknowledgments
 
-- The dataset used in this dashboard is sourced from [Twitter US Airline Sentiment(https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment)].
+- The dataset used in this dashboard is sourced from [[Twitter US Airline Sentiment]](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment)].
 
 ## License
 
