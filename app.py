@@ -1,22 +1,25 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-from wordcloud import WordCloud, STOPWORDS
-import  matplotlib.pyplot as plt
-import plotly.express as px
+import requests
+from io import BytesIO
+import zipfile
 
 st.title("Sentiment Analysis of Tweets about US Airlines")
 st.sidebar.title("Sentiment Analysis of Tweets about US Airlines")
 
-
 st.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 st.sidebar.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 
-data_url = r"E:/Random Coding/Clean/Tweets.csv"
+# Google Drive URL for the dataset (direct download link)
+google_drive_url = "https://drive.google.com/uc?id=1-lND-JSWbIxmBuUiQW8xCVerKORipG9H&export=download"
 
-@st.cache_data(persist = True)
+@st.cache(persist=True)
 def load_data():
-    data = pd.read_csv(data_url, error_bad_lines=False, warn_bad_lines=True, encoding='utf-8')
+    response = requests.get(google_drive_url)
+    zip_file = zipfile.ZipFile(BytesIO(response.content))
+    # Assuming your dataset is a CSV file inside the zip
+    csv_file = zip_file.extract(zip_file.namelist()[0], path='./data')  # Extract to a local directory
+    data = pd.read_csv(csv_file, error_bad_lines=False, warn_bad_lines=True, encoding='utf-8')
     data['tweet_created'] = pd.to_datetime(data['tweet_created'])
     return data
 
