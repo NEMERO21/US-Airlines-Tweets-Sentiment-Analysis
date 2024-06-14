@@ -16,7 +16,7 @@ data_url = r"https://www.kaggle.com/datasets/serkanp/airlinetweets"
 
 @st.cache_data(persist = True)
 def load_data():
-    data = pd.read_csv(data_url)
+    data = pd.read_csv(data_url, error_bad_lines=False, warn_bad_lines=True, encoding='utf-8')
     data['tweet_created'] = pd.to_datetime(data['tweet_created'])
     return data
 
