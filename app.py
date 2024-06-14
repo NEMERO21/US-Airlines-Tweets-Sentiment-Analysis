@@ -12,7 +12,7 @@ st.sidebar.title("Sentiment Analysis of Tweets about US Airlines")
 st.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 st.sidebar.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 
-data_url = r"https://www.kaggle.com/datasets/serkanp/airlinetweets"
+data_url = r"E:/Random Coding/Clean/Tweets.csv"
 
 @st.cache_data(persist = True)
 def load_data():
