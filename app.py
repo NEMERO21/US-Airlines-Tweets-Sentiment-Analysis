@@ -3,6 +3,10 @@ import pandas as pd
 import requests
 from io import BytesIO
 import zipfile
+import numpy as np
+from wordcloud import WordCloud, STOPWORDS
+import  matplotlib.pyplot as plt
+import plotly.express as px
 
 st.title("Sentiment Analysis of Tweets about US Airlines")
 st.sidebar.title("Sentiment Analysis of Tweets about US Airlines")
