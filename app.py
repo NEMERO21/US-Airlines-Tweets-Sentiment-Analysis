@@ -1,8 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
-from io import BytesIO
-import zipfile
 import numpy as np
 from wordcloud import WordCloud, STOPWORDS
 import  matplotlib.pyplot as plt
@@ -11,23 +8,24 @@ import plotly.express as px
 st.title("Sentiment Analysis of Tweets about US Airlines")
 st.sidebar.title("Sentiment Analysis of Tweets about US Airlines")
 
+
 st.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 st.sidebar.markdown("This app is a Streamlit dashboard to analyze the sentiment of Tweets 🐦")
 
-# Google Drive URL for the dataset (direct download link)
-google_drive_url = "https://drive.google.com/uc?id=1-lND-JSWbIxmBuUiQW8xCVerKORipG9H&export=download"
+data_url = r"https://drive.google.com/file/d/1-lND-JSWbIxmBuUiQW8xCVerKORipG9H/view?usp=sharing"
 
-@st.cache(persist=True)
+@st.cache_data(persist = True)
 def load_data():
-    response = requests.get(google_drive_url)
-    zip_file = zipfile.ZipFile(BytesIO(response.content))
-    # Assuming your dataset is a CSV file inside the zip
-    csv_file = zip_file.extract(zip_file.namelist()[0], path='./data')  # Extract to a local directory
-    data = pd.read_csv(csv_file, error_bad_lines=False, warn_bad_lines=True, encoding='utf-8')
+    data = pd.read_csv(data_url)
     data['tweet_created'] = pd.to_datetime(data['tweet_created'])
     return data
 
 data = load_data()
+
+st.sidebar.subheader("Show a random tweet")
+random_tweet = st.sidebar.radio('Sentiment', ('positive', 'neutral', 'negative'))
+#random_tweet = data['airline_sentiment'].sample(n=1).iloc[0]
+st.sidebar.markdown(data.query('airline_sentiment == @random_tweet')[["text"]].sample(n=1).iat[0,0])
 
 st.sidebar.subheader("Show a random tweet")
 random_tweet = st.sidebar.radio('Sentiment', ('positive', 'neutral', 'negative'))
